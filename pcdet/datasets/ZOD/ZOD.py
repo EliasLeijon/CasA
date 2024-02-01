@@ -15,7 +15,7 @@ from pcdet.datasets.dataset import DatasetTemplate
 
 from zod import ZodFrames
 
-class ZOD_dataset(DatasetTemplate):
+class ZOD(DatasetTemplate):
     def __init__(self, dataset_cfg, class_names, training=True, root_path=None, logger=None):
         super().__init__(
             dataset_cfg=dataset_cfg, class_names=class_names, training=training, root_path=root_path, logger=logger
