@@ -8,6 +8,7 @@ from .dataset import DatasetTemplate
 from .kitti.kitti_dataset import KittiDataset
 from .waymo.waymo_dataset import WaymoDataset
 from .waymo.waymo_tracking_dataset import WaymoTrackingDataset
+from .ZOD import ZOD
 from prefetch_generator import BackgroundGenerator
 
 
@@ -16,6 +17,7 @@ __all__ = {
     'KittiDataset': KittiDataset,
     'WaymoDataset': WaymoDataset,
     'WaymoTrackingDataset': WaymoTrackingDataset,
+    'ZOD': ZOD,
 }
 
 

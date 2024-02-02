@@ -56,8 +56,10 @@ class ZOD(DatasetTemplate):
         Returns:
 
         """
-        # item = self.prepare_data(self.frames[index]) 
-        return self.frames[index]
+        input_dict = self.frames[index]
+        data_dict = self.prepare_data(data_dict=input_dict)
+        # Add metadata? 
+        return data_dict
 
 # TODO: Add some tests to see that the dataset wrapper is working
 if __name__ == "__main__":
