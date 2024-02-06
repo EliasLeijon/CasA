@@ -59,6 +59,7 @@ then start a container with the built image, like
 docker run -it \
   --gpus all \
   -v "${PWD}:/workspace" \
+  -v "/media/student/Passport:/workspace/dataset" \
   -p 8080:8080 \
   --name "casa-container" \
   casa-image
