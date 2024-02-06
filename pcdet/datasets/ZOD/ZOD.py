@@ -28,6 +28,7 @@ class ZOD(DatasetTemplate):
         """
         To support a custom dataset, implement this function to receive the predicted results from the model, and then
         transform the unified normative coordinate to your required coordinate, and optionally save them to disk.
+        N is "num_samples"
 
         Args:
             batch_dict: dict of original data from the dataloader
@@ -37,7 +38,16 @@ class ZOD(DatasetTemplate):
                 pred_labels: (N), Tensor
             class_names:
             output_path: if it is not None, save the results to this path
+        
         Returns:
+            Returns (waymo case):
+            {
+                name: (N) Should be an array of class names
+                score: (N) Array of prediction scores
+                boxes_lidar: (N,7) Array of bouding boxes
+                frame_id: (N) From the input arg batch_dict
+                metadata (N) From the input arg batch_dict
+            }
 
         """
 

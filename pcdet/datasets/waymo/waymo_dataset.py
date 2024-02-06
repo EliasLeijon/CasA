@@ -180,7 +180,7 @@ class WaymoDataset(DatasetTemplate):
         """
         Args:
             batch_dict:
-                frame_id:
+                frame_id: []
             pred_dicts: list of pred_dicts
                 pred_boxes: (N, 7), Tensor
                 pred_scores: (N), Tensor
@@ -188,7 +188,6 @@ class WaymoDataset(DatasetTemplate):
             class_names:
             output_path:
 
-        Returns:
 
         """
 
