@@ -50,13 +50,18 @@ More can find in the [doc of docker](https://docs.docker.com/build/guide/intro/)
 The default name of a dockerfile is `Dockerfile`, after creating it, run cmd like below to build a image 
 
 ```shell
-docker build -t {image_name} .
+docker build -t casa-image .
 ```
 
 then start a container with the built image, like
 
 ```shell
-docker run {image_name}
+docker run -it \
+  --gpus all \
+  -v "${PWD}:/workspace" \
+  -p 8080:8080 \
+  --name "casa-container" \
+  casa-image
 ```
 
 ## Work with VSCode
