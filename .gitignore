@@ -1,2 +1,6 @@
 venv*
 __pycache__*
+pcdet/ops/
+build/
+pcdet.egg-info/
+pcdet/version.py
