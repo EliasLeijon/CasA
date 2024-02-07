@@ -53,16 +53,32 @@ The default name of a dockerfile is `Dockerfile`, after creating it, run cmd lik
 docker build -t casa-image .
 ```
 
-then start a container with the built image, like
+then create a container with the built image, like
 
 ```shell
-docker run -it \
-  --gpus all \
-  -v "${PWD}:/workspace" \
-  -v "/media/student/Passport:/workspace/dataset" \
-  -p 8080:8080 \
-  --name "casa-container" \
-  casa-image
+docker run -it   --gpus 'all'   -v "${PWD}:/workspace"   -v "/media/student/Passport:/workspace/dataset"   -v "/home/student/minizod:/workspace/minizod"   --name "casa-container" --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"  casa-image
+```
+
+
+
+it might be important to add "X11Forwarding yes" to your ssh_config (found in etc/)
+also make sure to run ´sudo xhost +´ on the host machine and that the $DISPLAY variable of the container matches the one of the host 
+
+when container is build run 
+```shell
+pip install --no-cache-dir -r requirements.txt \
+&& python3 setup.py develop
+```
+
+Start container again: 
+```shell
+docker start -i casa-container
+```
+
+Remove all containers:
+
+```shell
+docker rm $(docker ps -a -q)
 ```
 
 ## Work with VSCode
