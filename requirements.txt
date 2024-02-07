@@ -6,3 +6,6 @@ easydict
 pyyaml
 scikit-image
 tqdm
+zod
+prefetch_generator
+open3d
