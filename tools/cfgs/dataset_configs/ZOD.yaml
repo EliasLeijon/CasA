@@ -1,5 +1,7 @@
 DATASET: 'ZOD'
-DATA_PATH: '../../../../minizod'
+ROOT_PATH: './'
+DATA_PATH: 'minizod'
+VERSION: 'mini'
 
 POINT_CLOUD_RANGE: [-250, -250, -5, 250, 250, 5]
 
@@ -15,6 +17,41 @@ POINT_FEATURE_ENCODING: {
     used_feature_list: ['x', 'y', 'z', 'intensity'],
     src_feature_list: ['x', 'y', 'z', 'intensity'],
 }
+
+# Same as KITTI
+DATA_AUGMENTOR:
+    DISABLE_AUG_LIST: ['placeholder']
+    AUG_CONFIG_LIST:
+        # - NAME: gt_sampling
+        #   USE_ROAD_PLANE: True
+        #   DB_INFO_PATH:
+        #       - kitti_dbinfos_train.pkl
+        #   PREPARE: {
+        #      filter_by_min_points: ['Car:5', 'Pedestrian:5', 'Cyclist:5'],
+        #      filter_by_difficulty: [-1],
+        #   }
+
+        #   SAMPLE_GROUPS: ['Car:15','Pedestrian:10', 'Cyclist:10']
+        #   NUM_POINT_FEATURES: 4
+        #   DATABASE_WITH_FAKELIDAR: False
+        #   REMOVE_EXTRA_WIDTH: [0.0, 0.0, 0.0]
+        #   LIMIT_WHOLE_SCENE: False
+
+        - NAME: random_world_flip
+          ALONG_AXIS_LIST: ['x']
+
+        - NAME: random_world_rotation
+          WORLD_ROT_ANGLE: [-0.78539816, 0.78539816]
+
+        - NAME: random_world_scaling
+          WORLD_SCALE_RANGE: [0.95, 1.05]
+
+        - NAME: random_local_pyramid_aug
+          DROP_PROB: 0.25
+          SPARSIFY_PROB: 0.05
+          SPARSIFY_MAX_NUM: 50
+          SWAP_PROB: 0.1
+          SWAP_MAX_NUM: 50
 
 DATA_PROCESSOR:
     - NAME: mask_points_and_boxes_outside_range
