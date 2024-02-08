@@ -1,15 +1,22 @@
-CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist'] # TODO: Fix class names
+CLASS_NAMES: ['Pedestrian', 'Animal', 'PoleObject', 'TrafficBeacon',
+              'TrafficGuide', 'DynamicBarrier', 'Unclear', 'Vehicle_Car',
+              'Vehicle_Van', 'Vehicle_Truck', 'Vehicle_Bus', 'Vehicle_Trailer',
+              'Vehicle_TramTrain', 'Vehicle_HeavyEquip', 'Vehicle_Emergency',
+              'Vehicle_Other', 'VulnerableVehicle_Bicycle', 'VulnerableVehicle_Motorcycle',
+              'VulnerableVehicle_Stroller', 'VulnerableVehicle_Wheelchair',
+              'VulnerableVehicle_PersonalTransporter', 'VulnerableVehicle_NoRider', 'VulnerableVehicle_Other',
+              'TrafficSign_Front', 'TrafficSign_Back', 'TrafficSignal_Front', 'TrafficSignal_Back']
 
 DATA_CONFIG:
-    _BASE_CONFIG_: cfgs/dataset_configs/ZOD.yaml
+    _BASE_CONFIG_: tools/cfgs/dataset_configs/ZOD.yaml
     NUM_FRAMES: 1
     MERGE_FRAME: True
     TL: False
     SAMPLING: False
     POINT_FEATURE_ENCODING: {
         encoding_type: absolute_coordinates_encoding,
-        used_feature_list: ['x', 'y', 'z', 'intensity'],
-        src_feature_list: ['x', 'y', 'z', 'intensity']}
+        used_feature_list: ['x', 'y', 'z', 'intensity', 'elongation' ],
+        src_feature_list: ['x', 'y', 'z', 'intensity', 'elongation' ]}
 
 MODEL:
     NAME: VoxelRCNN
@@ -42,7 +49,15 @@ MODEL:
         CLASS_AGNOSTIC: False
 
         CLASS_NAMES_EACH_HEAD: [
-            [ 'Vehicle', 'Pedestrian', 'Cyclist' ]
+            ['Pedestrian', 'Animal', 'PoleObject', 'TrafficBeacon',
+              'TrafficGuide', 'DynamicBarrier', 'Unclear', 'Vehicle_Car',
+              'Vehicle_Van', 'Vehicle_Truck', 'Vehicle_Bus', 'Vehicle_Trailer',
+              'Vehicle_TramTrain', 'Vehicle_HeavyEquip', 'Vehicle_Emergency',
+              'Vehicle_Other', 'VulnerableVehicle_Bicycle', 'VulnerableVehicle_Motorcycle',
+              'VulnerableVehicle_Stroller', 'VulnerableVehicle_Wheelchair',
+              'VulnerableVehicle_PersonalTransporter', 'VulnerableVehicle_NoRider', 'VulnerableVehicle_Other',
+              'TrafficSign_Front', 'TrafficSign_Back', 'TrafficSignal_Front', 'TrafficSignal_Back']
+
         ]
 
         SHARED_CONV_CHANNEL: 64
@@ -192,7 +207,7 @@ MODEL:
             NMS_POST_MAXSIZE: 50075
 
 OPTIMIZATION:
-    BATCH_SIZE_PER_GPU: 2
+    BATCH_SIZE_PER_GPU: 1
     NUM_EPOCHS: 30
 
     OPTIMIZER: adam_onecycle

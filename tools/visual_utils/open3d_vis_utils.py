@@ -136,10 +136,10 @@ def draw_box(vis, gt_boxes, color=(0, 1, 0), ref_labels=None, score=None):
         # print(threeDLabel)
         # https://www.open3d.org/docs/0.12.0/python_api/open3d.ml.torch.html 
 
-        label_location = line_set.get_center()
-        label = get_letter_lines("A", label_location[0],label_location[1],label_location[2], 1)
-        label.paint_uniform_color([1,0,0])
-        vis.add_geometry(label)
+        # label_location = line_set.get_center()
+        # label = get_letter_lines("A", label_location[0],label_location[1],label_location[2], 1)
+        # label.paint_uniform_color([1,0,0])
+        # vis.add_geometry(label)
         
         # if score is not None:
         #     corners = box3d.get_box_points()

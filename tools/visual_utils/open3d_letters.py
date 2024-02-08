@@ -35,6 +35,19 @@ ALPHABET = {
                 [2, 3],
             ],
         },
+    # "R":  {
+    #     "points": [
+    #         [0, 1, 0],
+    #         [0, 0.5, 0],
+    #         [0, 0, 0],
+    #         [0, 0, 0],
+    #     ],
+    #     "lines": [
+    #         [0, 1],
+    #         [1, 2],
+    #         [2, 3],
+    #     ],
+ #   },
 
 }
 def _get_letter_lines(letter: str, x: int, y: int, z: int,  scale: int = 1):
