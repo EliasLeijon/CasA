@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
+# We need this for train.py
+# apt-get install libglib2.0-0
+# Answer 8 49
+
 RUN mkdir /workspace
 WORKDIR '/workspace'
 
