@@ -147,7 +147,7 @@ class DatasetTemplate(torch_data.Dataset):
                         **data_dict,
                     }
                 )
-
+       
         if data_dict.get('gt_boxes', None) is not None:
             selected = common_utils.keep_arrays_by_name(data_dict['gt_names'], self.class_names)
             data_dict['gt_boxes'] = data_dict['gt_boxes'][selected]
@@ -155,13 +155,11 @@ class DatasetTemplate(torch_data.Dataset):
             gt_classes = np.array([self.class_names.index(n) + 1 for n in data_dict['gt_names']], dtype=np.int32)
             gt_boxes = np.concatenate((data_dict['gt_boxes'], gt_classes.reshape(-1, 1).astype(np.float32)), axis=1)
             data_dict['gt_boxes'] = gt_boxes
-
         data_dict = self.point_feature_encoder.forward(data_dict)
-
         data_dict = self.data_processor.forward(
             data_dict=data_dict
         )
-
+        
         if self.training and len(data_dict['gt_boxes']) == 0:
             new_index = np.random.randint(self.__len__())
             return self.__getitem__(new_index)

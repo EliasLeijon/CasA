@@ -25,6 +25,7 @@ class DataLoaderX(DataLoader):
 
     def __iter__(self):
         return BackgroundGenerator(super().__iter__())
+    
 
 class DistributedSampler(_DistributedSampler):
 

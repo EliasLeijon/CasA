@@ -274,7 +274,8 @@ class Detector3DTemplate(nn.Module):
                 if post_process_cfg.OUTPUT_RAW_SCORE:
                     max_cls_preds, _ = torch.max(src_cls_preds, dim=-1)
                     selected_scores = max_cls_preds[selected]
-
+                # print(f"Box_preds: {box_preds}")
+                # print(f"Selected: {selected}")
                 final_scores = selected_scores
                 final_labels = label_preds[selected]
                 final_boxes = box_preds[selected]
@@ -292,9 +293,9 @@ class Detector3DTemplate(nn.Module):
                 'pred_labels': final_labels
             }
 
-
+            
             pred_dicts.append(record_dict)
-
+        print(f"\npred_scores: {record_dict}\n")
         return pred_dicts, recall_dict
 
     @staticmethod

@@ -5,6 +5,8 @@ from ...ops.iou3d_nms import iou3d_nms_utils
 
 def class_agnostic_nms(box_scores, box_preds, nms_config, score_thresh=None):
     src_box_scores = box_scores
+    # box_scores => {box_scores}")
+    # print(f"Score threshold => {score_thresh}")
     if score_thresh is not None:
         scores_mask = (box_scores >= score_thresh)
         box_scores = box_scores[scores_mask]
