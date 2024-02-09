@@ -106,7 +106,7 @@ MODEL:
     ROI_HEAD:
         NAME: CasA_V
         CLASS_AGNOSTIC: True
-        STAGES: 3
+        STAGES: 3 # Can reduce runtime by half if changed from 5 to 1
 
         PART:
             IN_CHANNEL: 256

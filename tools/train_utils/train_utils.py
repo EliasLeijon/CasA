@@ -19,14 +19,14 @@ def train_one_epoch(model, optimizer, train_loader, model_func, lr_scheduler, ac
         pbar = tqdm.tqdm(total=total_it_each_epoch, leave=leave_pbar, desc='train', dynamic_ncols=True)
 
     accus = 1
-
+   
     for cur_it in range(total_it_each_epoch):
+       
         try:
             batch = next(dataloader_iter)
         except StopIteration:
             dataloader_iter = iter(train_loader)
             batch = next(dataloader_iter)
-            print('new iters')
 
         lr_scheduler.step(accumulated_iter)
 
@@ -38,9 +38,7 @@ def train_one_epoch(model, optimizer, train_loader, model_func, lr_scheduler, ac
         if tb_log is not None:
             tb_log.add_scalar('meta_data/learning_rate', cur_lr, accumulated_iter)
 
-
         model.train()
-
         loss, tb_dict, disp_dict = model_func(model, batch)
         loss = loss/accus
         loss.backward()

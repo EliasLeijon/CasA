@@ -60,7 +60,7 @@ DATA_CONFIG:
 
         - NAME: transform_points_to_voxels
           VOXEL_SIZE: [0.2, 0.2, 0.05]  
-          MAX_POINTS_PER_VOXEL: 5 # Should this change if we change the voxel size?
+          MAX_POINTS_PER_VOXEL: 5
           MAX_NUMBER_OF_VOXELS: {
             'train': 16000,
             'test': 40000
@@ -253,8 +253,8 @@ MODEL:
 
     POST_PROCESSING:
         RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
-        SCORE_THRESH: 0.1 # Very low confident on our predictions
-        OUTPUT_RAW_SCORE: False
+        SCORE_THRESH: 0.7
+        OUTPUT_RAW_SCORE: True
 
         EVAL_METRIC: kitti
 
@@ -268,7 +268,7 @@ MODEL:
 
 OPTIMIZATION:
     BATCH_SIZE_PER_GPU: 1
-    NUM_EPOCHS: 250
+    NUM_EPOCHS: 80
 
     OPTIMIZER: adam_onecycle
     LR: 0.01

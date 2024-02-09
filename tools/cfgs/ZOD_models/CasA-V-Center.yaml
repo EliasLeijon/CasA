@@ -99,7 +99,7 @@ MODEL:
     ROI_HEAD:
         NAME: CasA_V_V1
         CLASS_AGNOSTIC: True
-        STAGES: 3
+        STAGES: 3 
 
         PART:
             IN_CHANNEL: 512
