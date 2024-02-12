@@ -132,9 +132,12 @@ class DatasetTemplate(torch_data.Dataset):
                 voxel_num_points: optional (num_voxels)
                 ...
         """
+        if self.training and len(data_dict['gt_boxes']) == 0:
+            print(f"\nWarning, got frame with no annotations, id = {data_dict['frame_id']} selecting another random frame instead\n")
+            new_index = np.random.randint(self.__len__())
+            return self.__getitem__(new_index)
         if self.training:
             assert 'gt_boxes' in data_dict, 'gt_boxes should be provided for training'
-
             data_dict = self.data_augmentor.forward(
                 data_dict={
                     **data_dict,
@@ -159,10 +162,6 @@ class DatasetTemplate(torch_data.Dataset):
         data_dict = self.data_processor.forward(
             data_dict=data_dict
         )
-        
-        if self.training and len(data_dict['gt_boxes']) == 0:
-            new_index = np.random.randint(self.__len__())
-            return self.__getitem__(new_index)
 
         data_dict.pop('gt_names', None)
         return data_dict

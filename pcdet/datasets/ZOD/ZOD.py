@@ -64,6 +64,8 @@ class ZOD(DatasetTemplate):
 
         self.frames = ZodFrames(dataset_root=dataset_cfg.DATA_PATH,
                     version=dataset_cfg.VERSION)
+        
+
         if training:
             self.data_ids = list(self.frames._train_ids)
         else:
@@ -136,11 +138,17 @@ class ZOD(DatasetTemplate):
                 continue
             gt_names.append(train_class)
             gt_boxes.append(zod_coordinate_system_to_uniform_coordinate_system(annotation.box3d))
+        # Turn N long list of (1, 7) arrays into (N, 7) array
+        if len(gt_names) > 0:
+            gt_names = np.vstack(gt_names)
+        if len(gt_boxes) > 0:
+            gt_boxes = np.vstack(gt_boxes)
+            
         input_dict = {
             'points'  : unc_points, # In unified normative coordinate system
             'frame_id': frame.metadata.frame_id,
-            'gt_names': np.array(gt_names),
-            'gt_boxes': np.array(gt_boxes)
+            'gt_names': gt_names,
+            'gt_boxes': gt_boxes
         }
         
         data_dict = self.prepare_data(data_dict=input_dict)
@@ -158,7 +166,7 @@ def zod_coordinate_system_to_uniform_coordinate_system(zod_box3d):
     [xc,yc,zc] = zod_box3d.center
     [length, width, height] = zod_box3d.size
     rotation = zod_box3d.orientation.yaw_pitch_roll[0]
-    uniformed_box = [xc, yc, zc, length, width, height, rotation]
+    uniformed_box = np.array((xc, yc, zc, length, width, height, rotation))
     return uniformed_box
 
 
